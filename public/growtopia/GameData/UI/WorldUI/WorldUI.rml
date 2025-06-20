@@ -1,0 +1,36 @@
+<rml>
+    <head>
+        <title>WorldUI</title>
+        <link type="text/rcss" href="WorldUI.rcss" />
+        <link type="text/template" href="../BaseTemplate.rml" />
+        <link type="text/template" href="EventPanel.rml" />
+        <link type="text/template" href="RightMenuPanel.rml" />
+        <script lang="text/lua">
+            function onShowUI(document, element)
+            local insets = GetInsets()
+            element.style.width = (element.client_width - insets[1] - insets[3]).."px"
+            end
+        </script>
+    </head>
+    <body template="BaseTemplate" class="world_ui" onshow="onShowUI(document, element) onFtuePanelShown(document)">
+        <div id="top_panel">
+            <div id="gems_panel" data-model="PlayerInfoModel">
+                <div class="panel" onclick="OnEvent(event, 'world_ui.gems_panel_click')" data-attrif-disabled="1">
+                    <div id="gem_left_panel">
+                        <div id="gem_icon"></div>
+                    </div>
+                    <div id="gem_right_panel">
+                        {{PlayerInfo.gemsCount}}
+                    </div>
+                </div>
+                <div id="plus_button" onclick="OnEvent(event, 'world_ui.gems_panel_click')"></div>
+            </div>
+        </div>
+        <div id="left_panel">
+            <template src="EventPanel" />
+        </div>
+        <div id="right_panel">
+            <template src="RightMenuPanel" />
+        </div>
+    </body>
+</rml>
